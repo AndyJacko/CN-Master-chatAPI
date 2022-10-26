@@ -10,7 +10,7 @@ exports.createUser = async (req, res) => {
     ) {
       const newUser = await User.create(req.body);
       const token = jwt.sign(
-        { _id: createdUser.id, email: createdUser.email },
+        { _id: newUser.id, email: newUser.email },
         process.env.JWT_KEY,
         { expiresIn: "1h" }
       );
