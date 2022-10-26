@@ -76,7 +76,15 @@ exports.updateUser = async (req, res) => {
         );
 
         if (updatedUser.modifiedCount === 1) {
-          res.status(200).send({ message: "User Updated", user: selectedUser });
+          const newUser = await User.find({ _id: req.body.id });
+
+          res
+            .status(200)
+            .send({
+              message: "User Updated",
+              user: selectedUser,
+              updated: newUser,
+            });
         } else {
           res.status(200).send({
             message: `User With ID: ${req.body.id} Already Up To Date`,

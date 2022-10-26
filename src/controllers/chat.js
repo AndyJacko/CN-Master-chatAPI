@@ -69,7 +69,15 @@ exports.updateChat = async (req, res) => {
         );
 
         if (updatedChat.modifiedCount === 1) {
-          res.status(200).send({ message: "Chat Updated", chat: selectedChat });
+          const newChat = await Chat.find({ _id: req.body.id });
+
+          res
+            .status(200)
+            .send({
+              message: "Chat Updated",
+              chat: selectedChat,
+              updated: newChat,
+            });
         } else {
           res.status(200).send({
             message: `Chat With ID: ${req.body.id} Already Up To Date`,
