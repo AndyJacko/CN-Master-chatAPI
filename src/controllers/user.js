@@ -78,13 +78,11 @@ exports.updateUser = async (req, res) => {
         if (updatedUser.modifiedCount === 1) {
           const newUser = await User.find({ _id: req.body.id });
 
-          res
-            .status(200)
-            .send({
-              message: "User Updated",
-              user: selectedUser,
-              updated: newUser,
-            });
+          res.status(200).send({
+            message: "User Updated",
+            user: selectedUser,
+            updated: newUser,
+          });
         } else {
           res.status(200).send({
             message: `User With ID: ${req.body.id} Already Up To Date`,
@@ -139,7 +137,7 @@ exports.loginUser = async (req, res) => {
 
     res.status(200).send({
       message: `User Logged In`,
-      user: req.user.username,
+      user: req.user._id,
       token: token,
     });
   } catch (err) {
