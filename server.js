@@ -4,6 +4,7 @@ const express = require("express");
 
 const userRoutes = require("./src/routes/user");
 const chatRoutes = require("./src/routes/chat");
+const galleryRoutes = require("./src/routes/gallery");
 
 const app = express();
 const port = process.env.PORT || 8081;
@@ -23,6 +24,7 @@ app.use((req, res, next) => {
 
 app.use(userRoutes);
 app.use(chatRoutes);
+app.use(galleryRoutes);
 
 app.listen(port, () => {
   console.log(`Server Connected On Port: ${port}...`);

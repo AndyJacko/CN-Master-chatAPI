@@ -69,9 +69,10 @@ exports.updateUser = async (req, res) => {
         const updatedUser = await User.updateOne(
           { _id: req.body.id },
           {
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
+            bio: req.body.bio,
+            link: req.body.link,
+            pic: req.body.pic,
+            nickname: req.body.nickname,
           }
         );
 
