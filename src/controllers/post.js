@@ -40,7 +40,8 @@ exports.readPost = async (req, res) => {
 
 exports.readPosts = async (req, res) => {
   try {
-    const readPosts = await Post.find({}).populate("user");
+    const readPosts = await Post.aggregate([{ $sample: { size: 5 } }]);
+    await Post.populate(readPosts, { path: "user" });
 
     if (readPosts[0]) {
       res.status(200).send({ posts: readPosts });

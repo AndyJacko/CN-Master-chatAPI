@@ -29,7 +29,7 @@ exports.createUser = async (req, res) => {
 exports.readUser = async (req, res) => {
   try {
     if (req.params.id.length === 24) {
-      const readUser = await User.find({ _id: req.params.id });
+      const readUser = await User.find({ _id: req.params.id }).populate("posts");
 
       if (readUser[0]) {
         res.status(200).send({ user: readUser });
