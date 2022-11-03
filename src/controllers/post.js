@@ -1,13 +1,22 @@
 const Post = require("../models/post");
+const User = require("../models/user");
 
 exports.createPost = async (req, res) => {
   try {
     if (
-      req.body.userID.length === 24 &&
+      req.body.user.length === 24 &&
       req.body.postimage.trim() !== "" &&
       req.body.comment.trim() !== ""
     ) {
       const newPost = await Post.create(req.body);
+      await User.updateOne(
+        { _id: newPost.user },
+        {
+          $push: {
+            posts: newPost._id,
+          },
+        }
+      );
 
       res.status(201).send({ message: "Post Created", post: newPost });
     } else {
