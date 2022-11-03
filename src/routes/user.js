@@ -4,6 +4,7 @@ const {
   createUser,
   readUser,
   readUsers,
+  readUsersLimit,
   updateUser,
   deleteUser,
   loginUser,
@@ -15,6 +16,7 @@ const userRouter = Router();
 
 userRouter.post("/createUser", hashPass, createUser);
 userRouter.get("/readUsers", readUsers);
+userRouter.get("/readUsers/:limit", readUsersLimit);
 userRouter.get("/readUser/:id", readUser);
 userRouter.put("/updateUser", updateUser);
 userRouter.delete("/deleteUser/:id", deleteUser);

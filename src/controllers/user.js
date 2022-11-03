@@ -60,6 +60,22 @@ exports.readUsers = async (req, res) => {
   }
 };
 
+exports.readUsersLimit = async (req, res) => {
+  try {
+    const readUsers = await User.aggregate([
+      { $sample: { size: +req.params.limit } },
+    ]);
+
+    if (readUsers[0]) {
+      res.status(200).send({ users: readUsers });
+    } else {
+      res.status(404).send({ message: `No Users Found` });
+    }
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
+};
+
 exports.updateUser = async (req, res) => {
   try {
     if (req.body.id.length === 24) {

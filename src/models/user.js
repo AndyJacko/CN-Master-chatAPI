@@ -12,7 +12,8 @@ const userSchema = new Schema({
   nickname: { type: String },
   followers: { type: Number, default: Math.ceil(Math.random() * 1000) },
   following: { type: Number, default: Math.ceil(Math.random() * 1000) },
-  posts: { type: Number, default: Math.ceil(Math.random() * 100) },
+  numposts: { type: Number, default: Math.ceil(Math.random() * 100) },
+  posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
 });
 
 const User = mongoose.model("User", userSchema);
